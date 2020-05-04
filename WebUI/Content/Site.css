@@ -1,0 +1,72 @@
+﻿body {
+    background-color: ghostwhite;
+}
+#price {
+    margin-bottom: 5px;
+}
+
+#cartTable td {
+    vertical-align: middle;
+}
+.navbar-right {
+    float: right !important;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+.qweqweqwe{
+    background: red;
+}
+@media (max-width: 300px) {
+    .photoList {
+        width: 100px;
+        height: auto;
+    }
+    .photoEdit {
+        width: 100px;
+        height: auto;
+    }
+}
+@media (min-width: 300px) and (max-width: 700px) {
+    .photoList {
+        width: 160px;
+        height: auto;
+    }
+
+    .photoEdit {
+        width: 160px;
+        height: auto;
+    }
+}
+@media (min-width: 700px) {
+    .photoList {
+        width: 300px;
+        height: auto;
+    }
+
+    .photoEdit {
+        width: 300px;
+        height: auto;
+    }
+}

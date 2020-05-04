@@ -1,0 +1,33 @@
+﻿@model IEnumerable<string>
+
+@{
+    bool horizontal = (bool)(ViewContext.RouteData.Values["horizontalNav"] ?? false);
+    string wrapperClasses = horizontal ? "btn-group btn-group-sm d-flex pre-scrollable" : null;
+}
+
+
+<div class="@wrapperClasses ">
+    @Html.ActionLink("Домой", "List", "Products", null, 
+    new 
+    { 
+        @class = horizontal ? "btn btn-block btn-primary btn-sm " :
+        "btn btn-block btn-primary btn-lg "
+    })
+
+    @foreach (var link in Model)
+    {
+        @Html.RouteLink(link, new
+        {
+            Contoller = "Products",
+            Action = "List",
+            type = link,
+            page = 1
+        }, new
+        {
+            @class = (horizontal ? "btn btn-block btn-sm " :
+             "btn btn-block btn-lg ")
+                + (link == ViewBag.SelectedType ? "btn-info" : "")
+        })
+    }
+</div>
+

@@ -1,0 +1,20 @@
+﻿@model Domain.Entities.Cart
+
+<div>
+    <div class="navbar-right d-none d-sm-block">
+        @Html.ActionLink("Заказать", "Index", "Cart",
+                new { returnUrl = Request.Url.PathAndQuery },
+                new { @class = "btn btn-outline-info my-2 my-sm-0" }
+        )
+    </div>
+    <div class="navbar-right d-block d-sm-none">
+        <a href=@Url.Action("Index","Cart", new { returnUrl = Request.Url.PathAndQuery}) class="btn navbar-brand">
+            <i class="fas fa-shopping-cart"></i>
+        </a>
+    </div>
+    <div class="navbar-text navbar-right">
+        <b class="d-none d-sm-block">Ваша корзина:</b>
+        @Model.Lines.Sum(x => x.Quantity) товаров,
+        @Model.ComputeTotalValue().ToString("# Тг")
+    </div>
+</div>

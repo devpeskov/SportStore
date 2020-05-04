@@ -1,0 +1,60 @@
+﻿@model Domain.Entities.Product
+
+@{
+    ViewBag.Title = "Админ панель: редактирование товара";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    HtmlHelper.ClientValidationEnabled = true;
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = true;
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3>Редактирование книги "@Model.Name"</h3>
+    </div>
+
+    @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row text-center" style="padding: 30px 30px 30px 30px">
+            <div class="col-12 col-sm-3">
+                <div class="editor-label">Фотография продукта: </div>
+                @if (Model.Image != null)
+                {
+                    <div class="div-avatar">
+                        @Html.Raw("<img class=\"photoEdit\" src=\"data:image/jpeg;base64,"
+                                    + Convert.ToBase64String(Model.Image) + "\" />")
+                    </div>
+                }
+                <div class="editor-field">
+                    <input type="file" name="uploadImage" class="btn btn-uploadImage" enctype="multipart/form-data" multiple accept="image/*,image/jpeg" />
+                </div>
+            </div>
+            <div class="panel-body col-9">
+                @Html.HiddenFor(m => m.ProductId)
+                @Html.HiddenFor(m => m.Image)
+                @foreach (var property in ViewData.ModelMetadata.Properties)
+                {
+                    if (property.PropertyName != "ProductId" && property.PropertyName != "Image")
+                    {
+                        <div class="form-group">
+                            <label>@(property.DisplayName ?? property.PropertyName)</label>
+                            @if (property.PropertyName == "Description")
+                            {
+                                @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 5 })
+                            }
+                            else
+                            {
+                                @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
+                            }
+                            @Html.ValidationMessage(property.PropertyName)
+                        </div>
+                    }
+                }
+            </div>
+
+            <div class="panel-footer">
+                <input type="submit" value="Сохранить" class="btn btn-info" />
+                @Html.ActionLink("Отмена", "Index", null, new { @class = "btn btn-brand" })
+            </div>
+        </div>
+         }
+</div>

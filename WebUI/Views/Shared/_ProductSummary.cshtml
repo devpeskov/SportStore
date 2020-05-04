@@ -1,0 +1,45 @@
+﻿@model Domain.Entities.Product
+
+    <div class="well">
+        <div class="row">
+            <div class="col-4 col-sm-8">
+                @if (Model.Image != null)
+                {
+                <div class="div-avatar">
+                    @Html.Raw("<img class=\"photoList\" src=\"data:image/jpeg;base64,"
+                                     + Convert.ToBase64String(Model.Image) + "\" />")
+                </div>
+                }
+            </div>
+            <div class="col-8 col-sm-4 text-right">
+                <div class="col-12 col-sm-4 float-right">
+                    <div class="float-right font-weight-normal">
+                        <h5>
+                            <strong id="price" style="height: 30px;" class="float-right badge-pill badge-dark">
+                                @Model.Price.ToString("# Тг")
+                            </strong>
+                        </h5>
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            <div class="float-right">
+                                @Html.HiddenFor(x => x.ProductId)
+                                @Html.Hidden("returnUrl", @Request.Url.PathAndQuery)
+                                <input type="submit" class="btn badge-pill btn-info" value="В корзину" />
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-8 float-right">
+                    <h3>
+                        <strong>@Model.Name</strong>
+                    </h3>
+                    <h4>
+                        <strong>@Model.Brand</strong>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <span class="lead">@Model.Description</span>
+    </div>
+<hr />
